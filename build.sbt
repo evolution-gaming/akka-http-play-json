@@ -8,6 +8,8 @@ startYear := Some(2016)
 
 organizationName := "Evolution Gaming"
 
+resolvers += Resolver.bintrayRepo("evolutiongaming", "maven")
+
 organizationHomepage := Some(url("http://evolutiongaming.com"))
 
 bintrayOrganization := Some("evolutiongaming")
