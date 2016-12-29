@@ -6,6 +6,8 @@ homepage := Some(new URL("http://github.com/evolution-gaming/akka-http-play-json
 
 startYear := Some(2016)
 
+publishMavenStyle := true
+
 organizationName := "Evolution Gaming"
 
 resolvers += Resolver.bintrayRepo("evolutiongaming", "maven")
