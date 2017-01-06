@@ -33,10 +33,15 @@ scalacOptions ++= Seq(
 
 scalacOptions in (Compile,doc) ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
-libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http-core" % "10.0.0",
-  "com.typesafe.akka" %% "akka-http" % "10.0.0",
-  "com.typesafe.play" %% "play-json" % "2.5.8"
-)
+libraryDependencies ++= {
+  val AkkaHttpVersion = "10.0.1"
+  val PlayJsonVersion = "2.5.8"
+
+  Seq(
+    "com.typesafe.akka" %% "akka-http-core" % AkkaHttpVersion,
+    "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
+    "com.typesafe.play" %% "play-json" % PlayJsonVersion
+  )
+}
 
 licenses := Seq(("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")))
