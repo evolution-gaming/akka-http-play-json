@@ -34,7 +34,7 @@ scalacOptions ++= Seq(
 scalacOptions in (Compile,doc) ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
 libraryDependencies ++= {
-  val AkkaHttpVersion = "10.0.2"
+  val AkkaHttpVersion = "10.0.3"
   val PlayJsonVersion = "2.5.8"
 
   Seq(
