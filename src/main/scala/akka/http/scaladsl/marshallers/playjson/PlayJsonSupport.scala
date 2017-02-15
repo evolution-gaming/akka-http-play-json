@@ -31,9 +31,8 @@ trait PlayJsonSupport {
      *
      * But sometimes we have bugs most likely because of https://bugzilla.mozilla.org/show_bug.cgi?id=741776
      */
-    val jsonContentTypeWithUTF8Charset = MediaType.customWithOpenCharset("application", "json") withCharset HttpCharsets.`UTF-8`
 
-    Marshaller.withFixedContentType(`application/json`) {HttpEntity(jsonContentTypeWithUTF8Charset, _)}
+    Marshaller.withFixedContentType(`application/json`) {HttpEntity(`application/json; charset=UTF-8`, _)}
   }
 
   /**
@@ -68,6 +67,8 @@ trait PlayJsonSupport {
 }
 
 object PlayJsonSupport extends PlayJsonSupport {
+
+  val `application/json; charset=UTF-8` = MediaType.customWithOpenCharset("application", "json") withCharset HttpCharsets.`UTF-8`
 
   case class PlayJsonError(error: JsError) extends RuntimeException {
     override def getMessage: String = JsError.toJson(error).toString()
