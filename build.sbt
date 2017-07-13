@@ -18,6 +18,8 @@ bintrayOrganization := Some("evolutiongaming")
 
 scalaVersion := "2.11.11"
 
+crossScalaVersions := Seq("2.11.11", "2.12.2")
+
 scalacOptions ++= Seq(
   "-encoding", "UTF-8",
   "-feature",
@@ -35,7 +37,7 @@ scalacOptions in (Compile,doc) ++= Seq("-groups", "-implicits", "-no-link-warnin
 
 libraryDependencies ++= {
   val AkkaHttpVersion = "10.0.9"
-  val PlayJsonVersion = "2.5.14"
+  val PlayJsonVersion = "2.6.2"
 
   Seq(
     "com.typesafe.akka" %% "akka-http-core" % AkkaHttpVersion,
