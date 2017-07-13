@@ -7,7 +7,7 @@
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.evolutiongaming" %% "akka-http-play-json" % "0.1.0",
+  "com.evolutiongaming" %% "akka-http-play-json" % "0.1.10",
   ...
 )
 ```
