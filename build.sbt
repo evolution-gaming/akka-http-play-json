@@ -35,7 +35,7 @@ scalacOptions ++= Seq(
   "-Xfuture"
 )
 
-scalacOptions in (Compile, doc) ++= Seq("-groups", "-implicits", "-no-link-warnings")
+Compile/doc/scalacOptions ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
 libraryDependencies ++= {
   val AkkaVersion = "2.5.16"
