@@ -74,5 +74,4 @@ object PlayJsonSupport extends PlayJsonSupport {
   case class PlayJsonError(error: JsError) extends RuntimeException {
     override def getMessage: String = JsError.toJson(error).toString()
   }
-
 }
