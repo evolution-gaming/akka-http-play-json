@@ -43,6 +43,7 @@ libraryDependencies ++= {
   val PlayJsonVersion = "2.6.10"
 
   Seq(
+    "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
     "com.typesafe.akka" %% "akka-actor" % AkkaVersion,
     "com.typesafe.akka" %% "akka-http-core" % AkkaHttpVersion,
     "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
