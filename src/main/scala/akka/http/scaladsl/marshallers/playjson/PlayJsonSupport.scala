@@ -54,13 +54,13 @@ trait PlayJsonSupport {
     * `A` => HTTP entity
     *
     * @param writes writer for `A`
-    * @param printer pretty printer function
+    * @param printer output generation function, default to `stringify`, could be overridden with `Json.prettyPrint`
     * @tparam A type to encode
     * @return marshaller for any `A` value
     */
   implicit def playJsonMarshaller[A](implicit
     writes: Writes[A],
-    printer: JsValue => String = Json.prettyPrint): ToEntityMarshaller[A] = {
+    printer: JsValue => String = Json.stringify): ToEntityMarshaller[A] = {
 
     jsonStringMarshaller.compose(printer).compose(writes.writes)
   }
@@ -68,10 +68,10 @@ trait PlayJsonSupport {
 
 object PlayJsonSupport extends PlayJsonSupport {
 
-  val `application/json; charset=UTF-8` = MediaType.customWithOpenCharset("application", "json") withCharset HttpCharsets.`UTF-8`
+  val `application/json; charset=UTF-8`: ContentType.WithCharset =
+    MediaType.customWithOpenCharset("application", "json") withCharset HttpCharsets.`UTF-8`
 
   case class PlayJsonError(error: JsError) extends RuntimeException {
     override def getMessage: String = JsError.toJson(error).toString()
   }
-
 }
