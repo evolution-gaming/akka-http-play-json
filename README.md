@@ -9,7 +9,7 @@ This project contains implicit marshaler and unmarshaler to enable simple endpoi
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.evolutiongaming" %% "akka-http-play-json" % "0.1.10",
+  "com.evolutiongaming" %% "akka-http-play-json" % "0.1.11",
   ...
 )
 ```
