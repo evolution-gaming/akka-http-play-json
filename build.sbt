@@ -16,9 +16,9 @@ organizationHomepage := Some(url("http://evolutiongaming.com"))
 
 bintrayOrganization := Some("evolutiongaming")
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.12.7"
 
-crossScalaVersions := Seq("2.11.12", "2.12.6")
+crossScalaVersions := Seq("2.11.12", "2.12.7")
 
 releaseCrossBuild := true
 
@@ -38,7 +38,7 @@ scalacOptions ++= Seq(
 Compile/doc/scalacOptions ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
 libraryDependencies ++= {
-  val AkkaVersion = "2.5.16"
+  val AkkaVersion = "2.5.17"
   val AkkaHttpVersion = "10.1.5"
   val PlayJsonVersion = "2.6.10"
 
