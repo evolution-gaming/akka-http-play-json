@@ -16,39 +16,25 @@ organizationHomepage := Some(url("http://evolutiongaming.com"))
 
 bintrayOrganization := Some("evolutiongaming")
 
-scalaVersion := crossScalaVersions.value.last
+scalaVersion := crossScalaVersions.value.head
 
-crossScalaVersions := Seq("2.11.12", "2.12.8")
+crossScalaVersions := Seq("2.13.0", "2.12.9")
 
 releaseCrossBuild := true
-
-scalacOptions ++= Seq(
-  "-encoding", "UTF-8",
-  "-feature",
-  "-unchecked",
-  "-deprecation",
-  "-Xfatal-warnings",
-  "-Xlint",
-  "-Yno-adapted-args",
-  "-Ywarn-dead-code",
-  "-Ywarn-numeric-widen",
-  "-Xfuture"
-)
 
 Compile / doc / scalacOptions ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
 libraryDependencies ++= {
-  val AkkaVersion = "2.5.20"
-  val AkkaHttpVersion = "10.1.7"
-  val PlayJsonVersion = "2.7.1"
+  val AkkaVersion = "2.5.25"
+  val AkkaHttpVersion = "10.1.9"
+  val PlayJsonVersion = "2.7.4"
 
   Seq(
-    "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
-    "com.typesafe.akka" %% "akka-actor" % AkkaVersion,
+    "com.typesafe.akka" %% "akka-stream"    % AkkaVersion,
+    "com.typesafe.akka" %% "akka-actor"     % AkkaVersion,
     "com.typesafe.akka" %% "akka-http-core" % AkkaHttpVersion,
-    "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
-    "com.typesafe.play" %% "play-json" % PlayJsonVersion
-  )
+    "com.typesafe.akka" %% "akka-http"      % AkkaHttpVersion,
+    "com.typesafe.play" %% "play-json"      % PlayJsonVersion)
 }
 
 licenses := Seq(("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")))
