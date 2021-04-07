@@ -25,7 +25,7 @@ releaseCrossBuild := true
 Compile / doc / scalacOptions ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
 libraryDependencies ++= {
-  val AkkaVersion = "2.6.3"
+  val AkkaVersion = "2.6.14"
   val AkkaHttpVersion = "10.1.11"
   val PlayJsonVersion = "2.7.4"
 
