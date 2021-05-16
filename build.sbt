@@ -8,33 +8,23 @@ startYear := Some(2016)
 
 publishMavenStyle := true
 
-organizationName := "Evolution Gaming"
+organizationName := "Evolution"
 
-resolvers += Resolver.bintrayRepo("evolutiongaming", "maven")
+organizationHomepage := Some(url("http://evolution.com"))
 
-organizationHomepage := Some(url("http://evolutiongaming.com"))
-
-bintrayOrganization := Some("evolutiongaming")
+publishTo := Some(Resolver.evolutionReleases)
 
 scalaVersion := crossScalaVersions.value.head
 
-crossScalaVersions := Seq("2.13.0", "2.12.9")
+crossScalaVersions := Seq("2.13.5", "2.12.13")
 
 releaseCrossBuild := true
 
 Compile / doc / scalacOptions ++= Seq("-groups", "-implicits", "-no-link-warnings")
 
-libraryDependencies ++= {
-  val AkkaVersion = "2.6.3"
-  val AkkaHttpVersion = "10.1.11"
-  val PlayJsonVersion = "2.7.4"
-
-  Seq(
-    "com.typesafe.akka" %% "akka-stream"    % AkkaVersion,
-    "com.typesafe.akka" %% "akka-actor"     % AkkaVersion,
-    "com.typesafe.akka" %% "akka-http-core" % AkkaHttpVersion,
-    "com.typesafe.akka" %% "akka-http"      % AkkaHttpVersion,
-    "com.typesafe.play" %% "play-json"      % PlayJsonVersion)
-}
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-stream" % "2.6.8",
+  "com.typesafe.akka" %% "akka-http"   % "10.2.4",
+  "com.typesafe.play" %% "play-json"   % "2.9.2")
 
 licenses := Seq(("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")))
