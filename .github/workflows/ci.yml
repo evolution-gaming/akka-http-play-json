@@ -30,12 +30,6 @@ jobs:
       - name: build ${{ matrix.scala }}
         run: sbt ++${{ matrix.scala }} clean check
 
-      - name: test coverage
-        if: success()
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: sbt ++${{ matrix.scala }} coverageReport coverageAggregate coveralls
-
       - name: slack
         uses: homoluctus/slatify@master
         if: failure() && github.ref == 'refs/heads/master'
