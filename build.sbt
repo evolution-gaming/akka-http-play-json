@@ -53,7 +53,7 @@ licenses := Seq(
 )
 
 //addCommandAlias("check", "all versionPolicyCheck Compile/doc")
-addCommandAlias("check", "show version")
+addCommandAlias("check", "all root/compile root-pekko/compile")
 addCommandAlias(
   "build",
   "all root/compile root-pekko/compile root/publish root-pekko/publish"
