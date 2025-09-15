@@ -2,14 +2,6 @@ import sbt.internal.ProjectMatrix
 
 lazy val ScalaVersions = Seq("2.13.16")
 
-publishTo := Some(Resolver.evolutionReleases)
-
-Compile / doc / scalacOptions ++= Seq(
-  "-groups",
-  "-implicits",
-  "-no-link-warnings"
-)
-
 lazy val root = (projectMatrix in file("."))
   .settings(
     organization := "com.evolutiongaming",
@@ -20,6 +12,12 @@ lazy val root = (projectMatrix in file("."))
     publishMavenStyle := true,
     organizationName := "Evolution",
     organizationHomepage := Some(url("https://evolution.com")),
+    publishTo := Some(Resolver.evolutionReleases),
+    Compile / doc / scalacOptions ++= Seq(
+      "-groups",
+      "-implicits",
+      "-no-link-warnings"
+    ),
     libraryDependencies ++= Seq(
       "com.typesafe.play" %% "play-json" % "2.10.7"
     )
