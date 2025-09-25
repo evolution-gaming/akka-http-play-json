@@ -28,7 +28,7 @@ lazy val root = (projectMatrix in file("."))
     configure = _.settings(
       moduleName := "pekko-http-play-json",
       libraryDependencies ++= Seq(
-        "org.apache.pekko" %% "pekko-stream" % "1.2.0",
+        "org.apache.pekko" %% "pekko-stream" % "1.2.1",
         "org.apache.pekko" %% "pekko-http" % "1.2.0",
         "com.evolution" %% "akka-to-pekko-adapter-stream" % "1.0.2",
         "com.evolution" %% "akka-to-pekko-adapter-http" % "1.0.2",
