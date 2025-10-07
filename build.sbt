@@ -1,6 +1,6 @@
 import sbt.internal.ProjectMatrix
 
-lazy val ScalaVersions = Seq("2.13.16")
+lazy val ScalaVersions = Seq("2.13.17")
 
 lazy val root = (projectMatrix in file("."))
   .settings(
