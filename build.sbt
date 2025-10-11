@@ -19,7 +19,7 @@ lazy val root = (projectMatrix in file("."))
       "-no-link-warnings"
     ),
     libraryDependencies ++= Seq(
-      "com.typesafe.play" %% "play-json" % "2.10.7"
+      "com.typesafe.play" %% "play-json" % "2.10.8"
     )
   )
   .jvmPlatform(
