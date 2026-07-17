@@ -1,6 +1,6 @@
 import sbt.internal.ProjectMatrix
 
-lazy val ScalaVersions = Seq("2.13.16")
+lazy val ScalaVersions = Seq("2.13.18")
 
 lazy val root = (projectMatrix in file("."))
   .settings(
@@ -20,7 +20,8 @@ lazy val root = (projectMatrix in file("."))
     ),
     libraryDependencies ++= Seq(
       "org.playframework" %% "play-json" % "3.0.6"
-    )
+    ),
+    ThisBuild / scalaVersion := ScalaVersions.head,
   )
   .jvmPlatform(
     scalaVersions = ScalaVersions,
@@ -28,11 +29,11 @@ lazy val root = (projectMatrix in file("."))
     configure = _.settings(
       moduleName := "pekko-http-play-json",
       libraryDependencies ++= Seq(
-        "org.apache.pekko" %% "pekko-stream" % "1.2.0",
-        "org.apache.pekko" %% "pekko-http" % "1.2.0",
-        "com.evolution" %% "akka-to-pekko-adapter-stream" % "1.0.2",
-        "com.evolution" %% "akka-to-pekko-adapter-http" % "1.0.2",
-        "com.evolution" %% "akka-to-pekko-adapter-actor" % "1.0.2"
+        "org.apache.pekko" %% "pekko-stream" % "1.6.0",
+        "org.apache.pekko" %% "pekko-http" % "1.3.0",
+        "com.evolution" %% "akka-to-pekko-adapter-stream" % "1.0.4",
+        "com.evolution" %% "akka-to-pekko-adapter-http" % "1.0.4",
+        "com.evolution" %% "akka-to-pekko-adapter-actor" % "1.0.4"
       )
     )
   )
@@ -42,8 +43,8 @@ lazy val root = (projectMatrix in file("."))
     configure = _.settings(
       moduleName := "akka-http-play-json",
       libraryDependencies ++= Seq(
-        "com.typesafe.akka" %% "akka-stream" % "2.6.21",
-        "com.typesafe.akka" %% "akka-http" % "10.2.10"
+        "com.typesafe.akka" %% "akka-stream" % "2.6.21", // `2.6.21` is last open source version before switch to BSL
+        "com.typesafe.akka" %% "akka-http" % "10.2.10" // `10.2.10` is last open source version before switch to BSL
       )
     )
   )
