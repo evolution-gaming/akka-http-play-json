@@ -1,6 +1,7 @@
 import sbt.{VirtualAxis, *}
 
-case class ConfigAxis(idSuffix: String, directorySuffix: String) extends VirtualAxis.StrongAxis {}
+case class ConfigAxis(idSuffix: String, directorySuffix: String)
+    extends VirtualAxis.StrongAxis {}
 
 object ConfigAxis {
 

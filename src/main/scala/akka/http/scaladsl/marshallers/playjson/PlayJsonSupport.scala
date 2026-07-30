@@ -8,8 +8,8 @@ import akka.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
 import akka.util.ByteString
 import play.api.libs.json._
 
-/**
-  * Automatic to and from JSON marshalling/unmarshalling using an in-scope *play-json* protocol.
+/** Automatic to and from JSON marshalling/unmarshalling using an in-scope
+  * *play-json* protocol.
   */
 trait PlayJsonSupport {
   import PlayJsonSupport._
@@ -32,35 +32,51 @@ trait PlayJsonSupport {
      * But sometimes we have bugs most likely because of https://bugzilla.mozilla.org/show_bug.cgi?id=741776
      */
 
-    Marshaller.withFixedContentType(`application/json`) {HttpEntity(`application/json; charset=UTF-8`, _)}
+    Marshaller.withFixedContentType(`application/json`) {
+      HttpEntity(`application/json; charset=UTF-8`, _)
+    }
   }
 
-  /**
-    * HTTP entity => `A`
+  /** HTTP entity => `A`
     *
-    * @param reads reader for `A`
-    * @tparam A type to decode
-    * @return unmarshaller for `A`
+    * @param reads
+    *   reader for `A`
+    * @tparam A
+    *   type to decode
+    * @return
+    *   unmarshaller for `A`
     */
-  implicit def playJsonUnmarshaller[A](implicit reads: Reads[A]): FromEntityUnmarshaller[A] = {
+  implicit def playJsonUnmarshaller[A](implicit
+      reads: Reads[A]
+  ): FromEntityUnmarshaller[A] = {
     def read(json: JsValue) = reads.reads(json) recoverTotal { error =>
-      throw RejectionError(ValidationRejection(JsError.toJson(error).toString, Some(PlayJsonError(error))))
+      throw RejectionError(
+        ValidationRejection(
+          JsError.toJson(error).toString,
+          Some(PlayJsonError(error))
+        )
+      )
     }
 
     jsonStringUnmarshaller.map(data => read(Json.parse(data)))
   }
 
-  /**
-    * `A` => HTTP entity
+  /** `A` => HTTP entity
     *
-    * @param writes writer for `A`
-    * @param printer output generation function, default to `stringify`, could be overridden with `Json.prettyPrint`
-    * @tparam A type to encode
-    * @return marshaller for any `A` value
+    * @param writes
+    *   writer for `A`
+    * @param printer
+    *   output generation function, default to `stringify`, could be overridden
+    *   with `Json.prettyPrint`
+    * @tparam A
+    *   type to encode
+    * @return
+    *   marshaller for any `A` value
     */
   implicit def playJsonMarshaller[A](implicit
-    writes: Writes[A],
-    printer: JsValue => String = Json.stringify): ToEntityMarshaller[A] = {
+      writes: Writes[A],
+      printer: JsValue => String = Json.stringify
+  ): ToEntityMarshaller[A] = {
 
     jsonStringMarshaller.compose(printer).compose(writes.writes)
   }
@@ -69,7 +85,10 @@ trait PlayJsonSupport {
 object PlayJsonSupport extends PlayJsonSupport {
 
   val `application/json; charset=UTF-8`: ContentType.WithCharset =
-    MediaType.customWithOpenCharset("application", "json") withCharset HttpCharsets.`UTF-8`
+    MediaType.customWithOpenCharset(
+      "application",
+      "json"
+    ) withCharset HttpCharsets.`UTF-8`
 
   case class PlayJsonError(error: JsError) extends RuntimeException {
     override def getMessage: String = JsError.toJson(error).toString()
