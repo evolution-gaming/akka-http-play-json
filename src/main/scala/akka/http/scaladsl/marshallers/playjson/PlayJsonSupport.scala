@@ -1,16 +1,16 @@
 package akka.http.scaladsl.marshallers.playjson
 
 import akka.http.scaladsl.marshalling.{Marshaller, ToEntityMarshaller}
-import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.MediaTypes.`application/json`
+import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.{RejectionError, ValidationRejection}
 import akka.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
 import akka.util.ByteString
 import play.api.libs.json._
 
-/** Automatic to and from JSON marshalling/unmarshalling using an in-scope
-  * *play-json* protocol.
-  */
+/**
+ * Automatic to and from JSON marshalling/unmarshalling using an in-scope *play-json* protocol.
+ */
 trait PlayJsonSupport {
   import PlayJsonSupport._
 
@@ -19,7 +19,7 @@ trait PlayJsonSupport {
       .forContentTypes(`application/json`)
       .mapWithCharset {
         case (ByteString.empty, _) => throw Unmarshaller.NoContentException
-        case (data, charset)       => data.decodeString(charset.nioCharset.name)
+        case (data, charset) => data.decodeString(charset.nioCharset.name)
       }
 
   private val jsonStringMarshaller: ToEntityMarshaller[String] = {
@@ -37,45 +37,49 @@ trait PlayJsonSupport {
     }
   }
 
-  /** HTTP entity => `A`
-    *
-    * @param reads
-    *   reader for `A`
-    * @tparam A
-    *   type to decode
-    * @return
-    *   unmarshaller for `A`
-    */
-  implicit def playJsonUnmarshaller[A](implicit
-      reads: Reads[A]
+  /**
+   * HTTP entity => `A`
+   *
+   * @param reads
+   *   reader for `A`
+   * @tparam A
+   *   type to decode
+   * @return
+   *   unmarshaller for `A`
+   */
+  implicit def playJsonUnmarshaller[A](
+    implicit
+    reads: Reads[A],
   ): FromEntityUnmarshaller[A] = {
     def read(json: JsValue) = reads.reads(json) recoverTotal { error =>
       throw RejectionError(
         ValidationRejection(
           JsError.toJson(error).toString,
-          Some(PlayJsonError(error))
-        )
+          Some(PlayJsonError(error)),
+        ),
       )
     }
 
     jsonStringUnmarshaller.map(data => read(Json.parse(data)))
   }
 
-  /** `A` => HTTP entity
-    *
-    * @param writes
-    *   writer for `A`
-    * @param printer
-    *   output generation function, default to `stringify`, could be overridden
-    *   with `Json.prettyPrint`
-    * @tparam A
-    *   type to encode
-    * @return
-    *   marshaller for any `A` value
-    */
-  implicit def playJsonMarshaller[A](implicit
-      writes: Writes[A],
-      printer: JsValue => String = Json.stringify
+  /**
+   * `A` => HTTP entity
+   *
+   * @param writes
+   *   writer for `A`
+   * @param printer
+   *   output generation function, default to `stringify`, could be overridden with
+   *   `Json.prettyPrint`
+   * @tparam A
+   *   type to encode
+   * @return
+   *   marshaller for any `A` value
+   */
+  implicit def playJsonMarshaller[A](
+    implicit
+    writes: Writes[A],
+    printer: JsValue => String = Json.stringify,
   ): ToEntityMarshaller[A] = {
 
     jsonStringMarshaller.compose(printer).compose(writes.writes)
@@ -87,7 +91,7 @@ object PlayJsonSupport extends PlayJsonSupport {
   val `application/json; charset=UTF-8`: ContentType.WithCharset =
     MediaType.customWithOpenCharset(
       "application",
-      "json"
+      "json",
     ) withCharset HttpCharsets.`UTF-8`
 
   case class PlayJsonError(error: JsError) extends RuntimeException {
