@@ -20,6 +20,7 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= Seq(
     "org.playframework" %% "play-json" % "3.0.6",
   ),
+  versionPolicyIntention := Compatibility.BinaryCompatible,
 )
 
 lazy val root = (project in file("."))
@@ -47,9 +48,8 @@ lazy val `root-pekko` = (project in file("pekko"))
     ),
   )
 
-//addCommandAlias("check", "all versionPolicyCheck Compile/doc")
-addCommandAlias("check", "all scalafmtCheckRepo")
-addCommandAlias("fmt", "+scalafmtRepo")
+addCommandAlias("check", "all scalafmtCheckRepo versionPolicyCheck Compile/doc")
+addCommandAlias("fmt", "scalafmtRepo")
 addCommandAlias(
   "build",
   "all root/testFull root-pekko/testFull root/compile root-pekko/compile root/publish root-pekko/publish",
