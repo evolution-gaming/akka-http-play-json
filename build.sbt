@@ -19,8 +19,8 @@ lazy val commonSettings = Seq(
   ),
   libraryDependencies ++= Seq(
     "org.playframework" %% "play-json" % "3.0.6",
-    "com.fasterxml.jackson.core" % "jackson-core" % "2.22.3",
-    "com.fasterxml.jackson.core" % "jackson-databind" % "2.22.3",
+    "com.fasterxml.jackson.core" % "jackson-core" % "2.22.4",
+    "com.fasterxml.jackson.core" % "jackson-databind" % "2.22.4",
   ),
   versionPolicyIntention := Compatibility.BinaryCompatible,
 )
