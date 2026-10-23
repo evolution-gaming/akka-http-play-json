@@ -19,13 +19,14 @@ lazy val commonSettings = Seq(
   ),
   libraryDependencies ++= Seq(
     "org.playframework" %% "play-json" % "3.0.6",
-    "com.fasterxml.jackson.core" % "jackson-core" % "2.22.3",
-    "com.fasterxml.jackson.core" % "jackson-databind" % "2.22.3",
+    "com.fasterxml.jackson.core" % "jackson-core" % "2.22.4",
+    "com.fasterxml.jackson.core" % "jackson-databind" % "2.22.4",
   ),
   versionPolicyIntention := Compatibility.BinaryCompatible,
 )
 
 lazy val root = (project in file("."))
+  .aggregate(`root-pekko`)
   .settings(commonSettings)
   .settings(
     moduleName := "akka-http-play-json",
@@ -39,11 +40,16 @@ lazy val `root-pekko` = (project in file("pekko"))
   .settings(commonSettings)
   .settings(
     moduleName := "pekko-http-play-json",
+    crossScalaVersions := Seq("2.13.18", "3.3.8"),
+    // no `_3` artifact released yet, drop after the first Scala 3 release
+    versionPolicyPreviousVersions := {
+      if (scalaBinaryVersion.value == "3") Nil else versionPolicyPreviousVersions.value
+    },
     Compile / unmanagedSourceDirectories +=
-      (root / Compile / scalaSource).value,
+      (LocalRootProject / Compile / scalaSource).value,
     libraryDependencies ++= Seq(
-      "org.apache.pekko" %% "pekko-stream" % "1.6.0",
-      "org.apache.pekko" %% "pekko-http" % "1.4.0",
+      "org.apache.pekko" %% "pekko-stream" % "1.7.1",
+      "org.apache.pekko" %% "pekko-http" % "1.4.2",
       "com.evolution" %% "akka-to-pekko-adapter-stream" % "1.0.4",
       "com.evolution" %% "akka-to-pekko-adapter-http" % "1.0.4",
       "com.evolution" %% "akka-to-pekko-adapter-actor" % "1.0.4",
@@ -52,7 +58,4 @@ lazy val `root-pekko` = (project in file("pekko"))
 
 addCommandAlias("check", "all scalafmtCheckRepo versionPolicyCheck Compile/doc")
 addCommandAlias("fmt", "scalafmtRepo")
-addCommandAlias(
-  "build",
-  "all root/testFull root-pekko/testFull root/compile root-pekko/compile root/publish root-pekko/publish",
-)
+addCommandAlias("build", "+testFull; +publish")
