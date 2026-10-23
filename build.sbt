@@ -25,7 +25,7 @@ lazy val commonSettings = Seq(
   versionPolicyIntention := Compatibility.BinaryCompatible,
 )
 
-lazy val root: Project = (project in file("."))
+lazy val root = (project in file("."))
   .aggregate(`root-pekko`)
   .settings(commonSettings)
   .settings(
@@ -46,7 +46,7 @@ lazy val `root-pekko` = (project in file("pekko"))
       if (scalaBinaryVersion.value == "3") Nil else versionPolicyPreviousVersions.value
     },
     Compile / unmanagedSourceDirectories +=
-      (root / Compile / scalaSource).value,
+      (LocalRootProject / Compile / scalaSource).value,
     libraryDependencies ++= Seq(
       "org.apache.pekko" %% "pekko-stream" % "1.7.1",
       "org.apache.pekko" %% "pekko-http" % "1.4.2",
