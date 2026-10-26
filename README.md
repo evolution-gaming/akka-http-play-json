@@ -13,7 +13,7 @@ This project contains implicit marshaller and unmarshaller to enable simple endp
 ```scala
 addSbtPlugin("com.evolution" % "sbt-artifactory-plugin" % "0.0.2")
 
-libraryDependencies += "com.evolutiongaming" %% "akka-http-play-json" % "0.2.0"
+libraryDependencies += "com.evolutiongaming" %% "akka-http-play-json" % "0.4.0"
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ import akka.http.scaladsl.marshallers.playjson.PlayJsonSupport._
 The project supports the Pekko version via the adapter layer: https://github.com/evolution-gaming/akka-to-pekko-adapter. If you want to use it, replacing the dependency should suffice.
 The Pekko version is cross-built for Scala 2.13 and Scala 3.
 ```scala
-libraryDependencies += "com.evolutiongaming" %% "pekko-http-play-json" % "0.2.0"
+libraryDependencies += "com.evolutiongaming" %% "pekko-http-play-json" % "0.4.0"
 ```
 Optionally you can rename the import to a Pekko version package:
 ```scala

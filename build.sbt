@@ -41,10 +41,6 @@ lazy val `root-pekko` = (project in file("pekko"))
   .settings(
     moduleName := "pekko-http-play-json",
     crossScalaVersions := Seq("2.13.18", "3.3.8"),
-    // no `_3` artifact released yet, drop after the first Scala 3 release
-    versionPolicyPreviousVersions := {
-      if (scalaBinaryVersion.value == "3") Nil else versionPolicyPreviousVersions.value
-    },
     Compile / unmanagedSourceDirectories +=
       (LocalRootProject / Compile / scalaSource).value,
     libraryDependencies ++= Seq(
