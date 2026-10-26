@@ -46,9 +46,9 @@ lazy val `root-pekko` = (project in file("pekko"))
     libraryDependencies ++= Seq(
       "org.apache.pekko" %% "pekko-stream" % "1.7.1",
       "org.apache.pekko" %% "pekko-http" % "1.4.2",
-      "com.evolution" %% "akka-to-pekko-adapter-stream" % "1.0.4",
-      "com.evolution" %% "akka-to-pekko-adapter-http" % "1.0.4",
-      "com.evolution" %% "akka-to-pekko-adapter-actor" % "1.0.4",
+      "com.evolution" %% "akka-to-pekko-adapter-stream" % "1.0.6",
+      "com.evolution" %% "akka-to-pekko-adapter-http" % "1.0.6",
+      "com.evolution" %% "akka-to-pekko-adapter-actor" % "1.0.6",
     ),
   )
 
