@@ -40,7 +40,7 @@ lazy val `root-pekko` = (project in file("pekko"))
   .settings(commonSettings)
   .settings(
     moduleName := "pekko-http-play-json",
-    crossScalaVersions := Seq("2.13.18", "3.3.8"),
+    crossScalaVersions := Seq("2.13.18", "3.3.9"),
     Compile / unmanagedSourceDirectories +=
       (LocalRootProject / Compile / scalaSource).value,
     libraryDependencies ++= Seq(
